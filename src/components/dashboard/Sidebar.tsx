@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { 
-  FiHome, 
-  FiShield, 
-  FiAlertTriangle, 
-  FiUsers, 
-  FiActivity, 
-  FiSettings, 
+import React, { useState } from "react";
+import {
+  FiHome,
+  FiShield,
+  FiAlertTriangle,
+  FiUsers,
+  FiActivity,
+  FiSettings,
   FiLogOut,
   FiChevronLeft,
-  FiChevronRight
-} from 'react-icons/fi';
+  FiChevronRight,
+} from "react-icons/fi";
 
 interface SidebarProps {
   activeTab: string;
@@ -20,37 +20,41 @@ interface SidebarProps {
   onToggleCollapse?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ 
-  activeTab, 
-  onTabChange, 
-  isCollapsed = false, 
-  onToggleCollapse 
+const Sidebar: React.FC<SidebarProps> = ({
+  activeTab,
+  onTabChange,
+  isCollapsed = false,
+  onToggleCollapse,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: FiHome },
-    { id: 'all-attacks', label: 'All Attacks', icon: FiShield },
-    { id: 'immediate-attacks', label: 'Immediate Attacks', icon: FiAlertTriangle },
-    { id: 'users-management', label: 'Users Management', icon: FiUsers },
-    { id: 'actions', label: 'Actions', icon: FiActivity },
-    { id: 'settings', label: 'Settings', icon: FiSettings }
+    { id: "dashboard", label: "Dashboard", icon: FiHome },
+    { id: "all-attacks", label: "All Attacks", icon: FiShield },
+    {
+      id: "immediate-attacks",
+      label: "Immediate Attacks",
+      icon: FiAlertTriangle,
+    },
+    { id: "users-management", label: "Users Management", icon: FiUsers },
+    { id: "actions", label: "Actions", icon: FiActivity },
+    { id: "settings", label: "Settings", icon: FiSettings },
   ];
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('user');
-    window.location.href = '/';
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
+    window.location.href = "/";
   };
 
   const shouldShowText = !isCollapsed || isHovered;
 
   return (
-    <div 
+    <div
       className={`
         bg-slate-900 text-white h-screen flex flex-col transition-all duration-300 ease-in-out
-        ${isCollapsed ? 'w-16' : 'w-64'} 
-        ${isCollapsed ? 'hover:w-64' : ''}
+        ${isCollapsed ? "w-16" : "w-64"} 
+        ${isCollapsed ? "hover:w-64" : ""}
         fixed left-0 top-0 z-50 shadow-2xl
       `}
       onMouseEnter={() => setIsHovered(true)}
@@ -59,7 +63,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Header */}
       <div className="p-4 border-b border-slate-700">
         <div className="flex items-center justify-between">
-          <div className={`flex items-center space-x-3 ${!shouldShowText ? 'justify-center' : ''}`}>
+          <div
+            className={`flex items-center space-x-3 ${
+              !shouldShowText ? "justify-center" : ""
+            }`}
+          >
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
               <FiShield className="w-6 h-6 text-white" />
             </div>
@@ -70,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               </div>
             )}
           </div>
-          
+
           {onToggleCollapse && !isHovered && (
             <button
               onClick={onToggleCollapse}
@@ -94,14 +102,19 @@ const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => onTabChange(item.id)}
             className={`
               w-full flex items-center space-x-3 p-3 rounded-lg transition-all duration-200
-              ${activeTab === item.id 
-                ? 'bg-blue-600 text-white shadow-lg' 
-                : 'text-slate-300 hover:bg-slate-700 hover:text-white'
+              ${
+                activeTab === item.id
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "text-slate-300 hover:bg-slate-700 hover:text-white"
               }
-              ${!shouldShowText ? 'justify-center' : ''}
+              ${!shouldShowText ? "justify-center" : ""}
             `}
           >
-            <item.icon className={`w-5 h-5 shrink-0 ${activeTab === item.id ? 'text-white' : ''}`} />
+            <item.icon
+              className={`w-5 h-5 shrink-0 ${
+                activeTab === item.id ? "text-white" : ""
+              }`}
+            />
             {shouldShowText && (
               <span className="font-medium">{item.label}</span>
             )}
@@ -132,13 +145,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           className={`
             w-full flex items-center space-x-3 p-3 rounded-lg text-red-400 
             hover:bg-red-600 hover:text-white transition-all duration-200
-            ${!shouldShowText ? 'justify-center' : ''}
+            ${!shouldShowText ? "justify-center" : ""}
           `}
         >
           <FiLogOut className="w-5 h-5 shrink-0" />
-          {shouldShowText && (
-            <span className="font-medium">Log Out</span>
-          )}
+          {shouldShowText && <span className="font-medium">Log Out</span>}
         </button>
       </div>
     </div>

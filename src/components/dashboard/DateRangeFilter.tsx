@@ -1,65 +1,70 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FiCalendar, FiClock, FiFilter, FiRefreshCw } from 'react-icons/fi';
-import { Button } from '@/components/ui';
+import React, { useState } from "react";
+import { FiCalendar, FiClock, FiFilter, FiRefreshCw } from "react-icons/fi";
+import { Button } from "@/components/ui";
 
 interface DateRangeFilterProps {
   onFilterChange?: (filters: FilterState) => void;
 }
 
 interface FilterState {
-  dateRange: 'today' | 'yesterday' | 'last7days' | 'last30days' | 'custom';
+  dateRange: "today" | "yesterday" | "last7days" | "last30days" | "custom";
   customStartDate?: string;
   customEndDate?: string;
-  timeRange: 'all' | 'last1h' | 'last6h' | 'last12h' | 'last24h';
+  timeRange: "all" | "last1h" | "last6h" | "last12h" | "last24h";
   severity: string[];
   attackTypes: string[];
 }
 
-const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => {
+const DateRangeFilter: React.FC<DateRangeFilterProps> = ({
+  onFilterChange,
+}) => {
   const [filters, setFilters] = useState<FilterState>({
-    dateRange: 'today',
-    timeRange: 'all',
+    dateRange: "today",
+    timeRange: "all",
     severity: [],
-    attackTypes: []
+    attackTypes: [],
   });
-  
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   const dateRangeOptions = [
-    { value: 'today', label: 'Today' },
-    { value: 'yesterday', label: 'Yesterday' },
-    { value: 'last7days', label: 'Last 7 Days' },
-    { value: 'last30days', label: 'Last 30 Days' },
-    { value: 'custom', label: 'Custom Range' }
+    { value: "today", label: "Today" },
+    { value: "yesterday", label: "Yesterday" },
+    { value: "last7days", label: "Last 7 Days" },
+    { value: "last30days", label: "Last 30 Days" },
+    { value: "custom", label: "Custom Range" },
   ];
 
   const timeRangeOptions = [
-    { value: 'all', label: 'All Time' },
-    { value: 'last1h', label: 'Last 1 Hour' },
-    { value: 'last6h', label: 'Last 6 Hours' },
-    { value: 'last12h', label: 'Last 12 Hours' },
-    { value: 'last24h', label: 'Last 24 Hours' }
+    { value: "all", label: "All Time" },
+    { value: "last1h", label: "Last 1 Hour" },
+    { value: "last6h", label: "Last 6 Hours" },
+    { value: "last12h", label: "Last 12 Hours" },
+    { value: "last24h", label: "Last 24 Hours" },
   ];
 
   const severityOptions = [
-    { value: 'critical', label: 'Critical', color: 'text-red-600' },
-    { value: 'high', label: 'High', color: 'text-orange-600' },
-    { value: 'medium', label: 'Medium', color: 'text-yellow-600' },
-    { value: 'low', label: 'Low', color: 'text-blue-600' }
+    { value: "critical", label: "Critical", color: "text-red-600" },
+    { value: "high", label: "High", color: "text-orange-600" },
+    { value: "medium", label: "Medium", color: "text-yellow-600" },
+    { value: "low", label: "Low", color: "text-blue-600" },
   ];
 
   const attackTypeOptions = [
-    { value: 'ddos', label: 'DDoS Attack' },
-    { value: 'brute_force', label: 'Brute Force' },
-    { value: 'port_scan', label: 'Port Scan' },
-    { value: 'web_attack', label: 'Web Attack' },
-    { value: 'infiltration', label: 'Infiltration' },
-    { value: 'botnet', label: 'Botnet' }
+    { value: "ddos", label: "DDoS Attack" },
+    { value: "brute_force", label: "Brute Force" },
+    { value: "port_scan", label: "Port Scan" },
+    { value: "web_attack", label: "Web Attack" },
+    { value: "infiltration", label: "Infiltration" },
+    { value: "botnet", label: "Botnet" },
   ];
 
-  const updateFilter = (key: keyof FilterState, value: FilterState[keyof FilterState]) => {
+  const updateFilter = (
+    key: keyof FilterState,
+    value: FilterState[keyof FilterState]
+  ) => {
     const newFilters = { ...filters, [key]: value };
     setFilters(newFilters);
     onFilterChange?.(newFilters);
@@ -67,24 +72,24 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
 
   const toggleSeverity = (severity: string) => {
     const newSeverity = filters.severity.includes(severity)
-      ? filters.severity.filter(s => s !== severity)
+      ? filters.severity.filter((s) => s !== severity)
       : [...filters.severity, severity];
-    updateFilter('severity', newSeverity);
+    updateFilter("severity", newSeverity);
   };
 
   const toggleAttackType = (type: string) => {
     const newTypes = filters.attackTypes.includes(type)
-      ? filters.attackTypes.filter(t => t !== type)
+      ? filters.attackTypes.filter((t) => t !== type)
       : [...filters.attackTypes, type];
-    updateFilter('attackTypes', newTypes);
+    updateFilter("attackTypes", newTypes);
   };
 
   const resetFilters = () => {
     const resetState: FilterState = {
-      dateRange: 'today',
-      timeRange: 'all',
+      dateRange: "today",
+      timeRange: "all",
       severity: [],
-      attackTypes: []
+      attackTypes: [],
     };
     setFilters(resetState);
     onFilterChange?.(resetState);
@@ -99,11 +104,13 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
             <FiFilter className="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">Filter & Time Range</h3>
+            <h3 className="text-lg font-semibold text-gray-900">
+              Filter & Time Range
+            </h3>
             <p className="text-sm text-gray-500">Customize your data view</p>
           </div>
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <Button
             variant="secondary"
@@ -114,7 +121,7 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
             <FiRefreshCw className="w-4 h-4" />
             <span>Reset</span>
           </Button>
-          
+
           <Button
             variant="primary"
             size="sm"
@@ -122,7 +129,7 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
             className="flex items-center space-x-1"
           >
             <FiCalendar className="w-4 h-4" />
-            <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
+            <span>{isExpanded ? "Collapse" : "Expand"}</span>
           </Button>
         </div>
       </div>
@@ -137,10 +144,10 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
           </label>
           <select
             value={filters.dateRange}
-            onChange={(e) => updateFilter('dateRange', e.target.value)}
+            onChange={(e) => updateFilter("dateRange", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            {dateRangeOptions.map(option => (
+            {dateRangeOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -156,10 +163,10 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
           </label>
           <select
             value={filters.timeRange}
-            onChange={(e) => updateFilter('timeRange', e.target.value)}
+            onChange={(e) => updateFilter("timeRange", e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            {timeRangeOptions.map(option => (
+            {timeRangeOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -169,23 +176,27 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
       </div>
 
       {/* Custom Date Range */}
-      {filters.dateRange === 'custom' && (
+      {filters.dateRange === "custom" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Start Date</label>
+            <label className="text-sm font-medium text-gray-700">
+              Start Date
+            </label>
             <input
               type="date"
-              value={filters.customStartDate || ''}
-              onChange={(e) => updateFilter('customStartDate', e.target.value)}
+              value={filters.customStartDate || ""}
+              onChange={(e) => updateFilter("customStartDate", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">End Date</label>
+            <label className="text-sm font-medium text-gray-700">
+              End Date
+            </label>
             <input
               type="date"
-              value={filters.customEndDate || ''}
-              onChange={(e) => updateFilter('customEndDate', e.target.value)}
+              value={filters.customEndDate || ""}
+              onChange={(e) => updateFilter("customEndDate", e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -197,17 +208,20 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
         <div className="pt-4 border-t border-gray-200 space-y-4">
           {/* Severity Filter */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Severity Levels</label>
+            <label className="text-sm font-medium text-gray-700">
+              Severity Levels
+            </label>
             <div className="flex flex-wrap gap-2">
-              {severityOptions.map(option => (
+              {severityOptions.map((option) => (
                 <button
                   key={option.value}
                   onClick={() => toggleSeverity(option.value)}
                   className={`
                     px-3 py-1.5 rounded-lg text-sm font-medium border transition-all
-                    ${filters.severity.includes(option.value)
-                      ? `${option.color} bg-opacity-10 border-current`
-                      : 'text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100'
+                    ${
+                      filters.severity.includes(option.value)
+                        ? `${option.color} bg-opacity-10 border-current`
+                        : "text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100"
                     }
                   `}
                 >
@@ -219,17 +233,20 @@ const DateRangeFilter: React.FC<DateRangeFilterProps> = ({ onFilterChange }) => 
 
           {/* Attack Types Filter */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Attack Types</label>
+            <label className="text-sm font-medium text-gray-700">
+              Attack Types
+            </label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {attackTypeOptions.map(option => (
+              {attackTypeOptions.map((option) => (
                 <button
                   key={option.value}
                   onClick={() => toggleAttackType(option.value)}
                   className={`
                     px-3 py-2 rounded-lg text-sm font-medium border text-left transition-all
-                    ${filters.attackTypes.includes(option.value)
-                      ? 'text-blue-700 bg-blue-50 border-blue-200'
-                      : 'text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100'
+                    ${
+                      filters.attackTypes.includes(option.value)
+                        ? "text-blue-700 bg-blue-50 border-blue-200"
+                        : "text-gray-600 bg-gray-50 border-gray-200 hover:bg-gray-100"
                     }
                   `}
                 >

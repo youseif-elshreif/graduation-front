@@ -229,7 +229,7 @@ export interface ReportConfig {
 
 // Component Props Types
 export interface ChartProps {
-  data: any;
+  data: Record<string, unknown>;
   width?: number | string;
   height?: number | string;
   className?: string;
@@ -293,12 +293,12 @@ export interface SortOptions {
 // Real-time Update Types
 export interface LiveUpdate {
   type: "threat" | "block" | "system" | "user";
-  data: any;
+  data: Record<string, unknown>;
   timestamp: Date;
 }
 
 export interface WebSocketMessage {
   event: string;
-  data: any;
+  data: Record<string, unknown>;
   timestamp: Date;
 }
