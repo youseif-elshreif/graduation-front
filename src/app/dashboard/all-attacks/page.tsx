@@ -69,7 +69,7 @@ const AllAttacksPage: React.FC = () => {
     }
 
     // Severity filter
-    if (filters.severity) {
+    if (filters.severity && filters.severity !== "all") {
       filtered = filtered.filter(
         (threat) => threat.severity === filters.severity
       );
@@ -86,21 +86,23 @@ const AllAttacksPage: React.FC = () => {
     }
 
     // Time range filter
-    const now = new Date();
-    const timeRangeHours = {
-      "1m": 1 / 60,
-      "5m": 5 / 60,
-      "1h": 1,
-      "24h": 24,
-    };
+    if (filters.timeRange && filters.timeRange !== "all") {
+      const now = new Date();
+      const timeRangeHours = {
+        "1min": 1 / 60,
+        "5min": 5 / 60,
+        "1hour": 1,
+        "24hours": 24,
+      };
 
-    const hours =
-      timeRangeHours[filters.timeRange as keyof typeof timeRangeHours] || 24;
-    const cutoffTime = new Date(now.getTime() - hours * 60 * 60 * 1000);
+      const hours =
+        timeRangeHours[filters.timeRange as keyof typeof timeRangeHours] || 24;
+      const cutoffTime = new Date(now.getTime() - hours * 60 * 60 * 1000);
 
-    filtered = filtered.filter(
-      (threat) => new Date(threat.timestamp) > cutoffTime
-    );
+      filtered = filtered.filter(
+        (threat) => new Date(threat.timestamp) > cutoffTime
+      );
+    }
 
     setFilteredThreats(filtered);
     setCurrentPage(1); // Reset to first page when filters change

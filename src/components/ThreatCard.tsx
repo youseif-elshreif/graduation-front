@@ -148,11 +148,11 @@ const ThreatCard: React.FC<ExtendedThreatCardProps> = ({
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
-            {!showActions && onViewDetails && (
+            {onViewDetails && (
               <button
                 onClick={() => onViewDetails && onViewDetails(threat.id)}
-                className="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 text-gray-600 
-                         hover:text-blue-600 transition-all opacity-0 group-hover:opacity-100"
+                className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 
+                           hover:text-gray-800 transition-all"
                 aria-label="View Details"
               >
                 <FiEye className="w-4 h-4" />

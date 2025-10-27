@@ -64,7 +64,7 @@ const ImmediateAttacksPage: React.FC = () => {
     }
 
     // Severity filter
-    if (filters.severity) {
+    if (filters.severity && filters.severity !== "all") {
       filtered = filtered.filter(
         (threat) => threat.severity === filters.severity
       );
@@ -81,21 +81,23 @@ const ImmediateAttacksPage: React.FC = () => {
     }
 
     // Time range filter
-    const now = new Date();
-    const timeRangeHours = {
-      "1m": 1 / 60,
-      "5m": 5 / 60,
-      "1h": 1,
-      "24h": 24,
-    };
+    if (filters.timeRange && filters.timeRange !== "all") {
+      const now = new Date();
+      const timeRangeHours = {
+        "1min": 1 / 60,
+        "5min": 5 / 60,
+        "1hour": 1,
+        "24hours": 24,
+      };
 
-    const hours =
-      timeRangeHours[filters.timeRange as keyof typeof timeRangeHours] || 1;
-    const cutoffTime = new Date(now.getTime() - hours * 60 * 60 * 1000);
+      const hours =
+        timeRangeHours[filters.timeRange as keyof typeof timeRangeHours] || 1;
+      const cutoffTime = new Date(now.getTime() - hours * 60 * 60 * 1000);
 
-    filtered = filtered.filter(
-      (threat) => new Date(threat.timestamp) > cutoffTime
-    );
+      filtered = filtered.filter(
+        (threat) => new Date(threat.timestamp) > cutoffTime
+      );
+    }
 
     setFilteredThreats(filtered);
   }, [threats, filters]);
@@ -206,7 +208,7 @@ const ImmediateAttacksPage: React.FC = () => {
           onBlock={(id: string) => handleThreatAction(id, "block")}
           onInvestigate={(id: string) => handleThreatAction(id, "investigate")}
           onDismiss={(id: string) => handleThreatAction(id, "dismiss")}
-          showActions={false} // Show view button instead of action buttons
+          showActions={true} // Show both view button and action buttons
           showCheckboxes={false} // No checkboxes for immediate attacks
           emptyMessage="No immediate threats detected at the moment."
         />
