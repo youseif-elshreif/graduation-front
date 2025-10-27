@@ -479,6 +479,42 @@ const Dashboard: React.FC = () => {
           </div>
         );
 
+      case "all-attacks":
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              All Attacks
+            </h2>
+            <p className="text-gray-600 mb-6">
+              This page is under development. Please visit the dedicated page.
+            </p>
+            <a
+              href="/all-attacks"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Go to All Attacks Page
+            </a>
+          </div>
+        );
+
+      case "immediate-attacks":
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Immediate Attacks
+            </h2>
+            <p className="text-gray-600 mb-6">
+              This page is under development. Please visit the dedicated page.
+            </p>
+            <a
+              href="/immediate-attacks"
+              className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              Go to Immediate Attacks Page
+            </a>
+          </div>
+        );
+
       default:
         return (
           <div className="flex items-center justify-center h-96">

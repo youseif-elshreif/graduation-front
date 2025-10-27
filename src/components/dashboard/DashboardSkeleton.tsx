@@ -2,7 +2,7 @@ import React from "react";
 
 const DashboardSkeleton: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-blue-50 to-indigo-100">
       <div className="flex h-screen">
         {/* Sidebar Skeleton */}
         <div className="w-64 bg-white shadow-xl">
