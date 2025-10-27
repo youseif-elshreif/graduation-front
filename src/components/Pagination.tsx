@@ -76,9 +76,10 @@ const Pagination: React.FC<ExtendedPaginationProps> = ({
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Results Info */}
         <div className="text-sm text-gray-700">
-          Showing <span className="font-medium text-gray-900">{startItem}</span> to{" "}
-          <span className="font-medium text-gray-900">{endItem}</span> of{" "}
-          <span className="font-medium text-gray-900">{totalCount}</span> results
+          Showing <span className="font-medium text-gray-900">{startItem}</span>{" "}
+          to <span className="font-medium text-gray-900">{endItem}</span> of{" "}
+          <span className="font-medium text-gray-900">{totalCount}</span>{" "}
+          results
         </div>
 
         {/* Pagination Controls */}
