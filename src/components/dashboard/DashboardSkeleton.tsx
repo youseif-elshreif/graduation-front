@@ -31,17 +31,6 @@ const DashboardSkeleton: React.FC = () => {
               </div>
             ))}
           </div>
-
-          {/* User Section */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
-              <div className="flex-1">
-                <div className="w-20 h-4 bg-gray-200 rounded mb-1 animate-pulse"></div>
-                <div className="w-16 h-3 bg-gray-200 rounded animate-pulse"></div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Main Content Area */}
