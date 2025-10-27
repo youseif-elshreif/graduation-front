@@ -206,7 +206,7 @@ const ImmediateAttacksPage: React.FC = () => {
           onBlock={(id: string) => handleThreatAction(id, "block")}
           onInvestigate={(id: string) => handleThreatAction(id, "investigate")}
           onDismiss={(id: string) => handleThreatAction(id, "dismiss")}
-          showActions={true} // Show action buttons inline
+          showActions={false} // Show view button instead of action buttons
           showCheckboxes={false} // No checkboxes for immediate attacks
           emptyMessage="No immediate threats detected at the moment."
         />
