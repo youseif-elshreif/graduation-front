@@ -187,7 +187,7 @@ const IPAlertsTimelineModal: React.FC<IPAlertsTimelineModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="IP Alerts Timeline Analysis"
-      className="max-w-7xl w-full max-h-[90vh] overflow-hidden"
+      className="max-w-4xl w-full max-h-[90vh] overflow-hidden"
     >
       <div className="flex flex-col h-[calc(90vh-64px)] overflow-y-auto">
         {/* Search and Filter Section */}

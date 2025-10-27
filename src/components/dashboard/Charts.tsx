@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Card, ChartWrapper, Button } from "@/components/ui";
 import { FiEye } from "react-icons/fi";
-import IPAlertsTimelineModal from "./IPAlertsTimelineModal";
+import IPAlertsTimelineModal from "../modals/IPAlertsTimelineModal";
 import {
   AlertsTimelineData,
   AttackTypeDistribution,

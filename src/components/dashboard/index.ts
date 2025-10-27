@@ -11,7 +11,7 @@ export {
 } from "./Charts";
 
 // Modal Components
-export { default as IPAlertsTimelineModal } from "./IPAlertsTimelineModal";
+export { default as IPAlertsTimelineModal } from "../modals/IPAlertsTimelineModal";
 
 // Skeleton Components
 // export { default as DashboardSkeleton } from "./DashboardSkeleton";
