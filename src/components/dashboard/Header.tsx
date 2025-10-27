@@ -10,7 +10,6 @@ interface HeaderProps {
   notificationCount?: number;
   title?: string;
   subtitle?: string;
-  sidebarWidth?: string;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -19,7 +18,6 @@ const Header: React.FC<HeaderProps> = ({
   notificationCount = 5,
   title = "Security Dashboard",
   subtitle = "Real-time monitoring and threat detection system overview",
-  sidebarWidth = "w-64",
 }) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -31,11 +29,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header
-      className={`bg-white border-b border-gray-200 fixed top-0 right-0 z-30 ${
-        sidebarWidth === "w-16" ? "left-16" : "left-64"
-      } transition-all duration-300`}
-    >
+    <header className="bg-white border-b border-gray-200 w-full">
       <div className="px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Page Title */}

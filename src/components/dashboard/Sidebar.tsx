@@ -51,12 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
-      className={`
-        bg-slate-900 text-white h-screen flex flex-col transition-all duration-300 ease-in-out
-        ${isCollapsed ? "w-16" : "w-64"} 
-        ${isCollapsed ? "hover:w-64" : ""}
-        fixed left-0 top-0 z-50 shadow-2xl
-      `}
+      className="bg-slate-900 text-white h-full w-full flex flex-col transition-all duration-300 ease-in-out shadow-xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -79,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
 
-          {onToggleCollapse && !isHovered && (
+          {onToggleCollapse && (
             <button
               onClick={onToggleCollapse}
               className="p-1 rounded-lg hover:bg-slate-700 transition-colors"
@@ -95,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Navigation Menu */}
-      <nav className="flex-1 p-4 space-y-2">
+      <nav className="p-4 space-y-2">
         {menuItems.map((item) => (
           <button
             key={item.id}

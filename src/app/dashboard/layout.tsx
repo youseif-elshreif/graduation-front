@@ -84,27 +84,35 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 via-blue-50 to-indigo-100">
-      <div className="flex h-screen">
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Sidebar - Fixed width */}
+      <div
+        className={`${
+          isSidebarCollapsed ? "w-16" : "w-64"
+        } transition-all duration-300 shrink-0`}
+      >
         <Sidebar
           activeTab={getActiveTab()}
           onTabChange={handleTabChange}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={toggleSidebar}
         />
+      </div>
 
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <Header
-            userName={
-              user ? `${user.firstName} ${user.lastName}` : "Administrator"
-            }
-            userRole={user?.role || "admin"}
-          />
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Header */}
+        <Header
+          userName={
+            user ? `${user.firstName} ${user.lastName}` : "Administrator"
+          }
+          userRole={user?.role || "admin"}
+        />
 
-          <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6">
-            <div className="max-w-7xl mx-auto">{children}</div>
-          </main>
-        </div>
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto bg-gray-50 p-4 md:p-6">
+          <div className="max-w-full w-full">{children}</div>
+        </main>
       </div>
     </div>
   );
