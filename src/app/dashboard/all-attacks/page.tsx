@@ -185,7 +185,7 @@ const AllAttacksPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50 p-6">
+      <div className="min-h-screen bg-gray-50 p-4">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-gray-200 rounded w-64"></div>
@@ -202,7 +202,7 @@ const AllAttacksPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gray-50">
       <div className="flex">
         {/* Main Content */}
         <div className="flex-1 p-6">
@@ -260,7 +260,7 @@ const AllAttacksPage: React.FC = () => {
         </div>
 
         {/* Right Sidebar */}
-        <div className="w-80 border-l border-gray-200 bg-white/50 backdrop-blur-sm">
+        <div className="w-80 border-l border-gray-200 bg-white">
           <ThreatsSidebar threats={filteredThreats} />
         </div>
       </div>

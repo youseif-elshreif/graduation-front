@@ -134,7 +134,7 @@ const ImmediateAttacksPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50 p-6">
+      <div className="min-h-screen bg-gray-50 p-4">
         <div className="max-w-4xl mx-auto">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-gray-200 rounded w-64"></div>
@@ -151,7 +151,7 @@ const ImmediateAttacksPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50">
+    <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -172,7 +172,7 @@ const ImmediateAttacksPage: React.FC = () => {
         />
 
         {/* Stats Banner */}
-        <div className="bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200 p-4">
+        <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-red-600">

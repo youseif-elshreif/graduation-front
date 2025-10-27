@@ -71,14 +71,14 @@ const Pagination: React.FC<ExtendedPaginationProps> = ({
 
   return (
     <div
-      className={`bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-4 shadow-lg ${className}`}
+      className={`bg-white rounded-xl border border-gray-200 p-4 shadow-sm ${className}`}
     >
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Results Info */}
-        <div className="text-sm text-gray-300">
-          Showing <span className="font-medium text-white">{startItem}</span> to{" "}
-          <span className="font-medium text-white">{endItem}</span> of{" "}
-          <span className="font-medium text-white">{totalCount}</span> results
+        <div className="text-sm text-gray-700">
+          Showing <span className="font-medium text-gray-900">{startItem}</span> to{" "}
+          <span className="font-medium text-gray-900">{endItem}</span> of{" "}
+          <span className="font-medium text-gray-900">{totalCount}</span> results
         </div>
 
         {/* Pagination Controls */}
@@ -89,8 +89,8 @@ const Pagination: React.FC<ExtendedPaginationProps> = ({
             disabled={currentPage === 1}
             className={`flex items-center gap-1 px-3 py-2 rounded-lg font-medium transition-all ${
               currentPage === 1
-                ? "bg-white/5 text-gray-500 cursor-not-allowed"
-                : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
             }`}
           >
             <FiChevronLeft className="w-4 h-4" />
@@ -104,7 +104,7 @@ const Pagination: React.FC<ExtendedPaginationProps> = ({
                 return (
                   <span
                     key={`ellipsis-${index}`}
-                    className="px-3 py-2 text-gray-400"
+                    className="px-3 py-2 text-gray-500"
                   >
                     ...
                   </span>
@@ -119,8 +119,8 @@ const Pagination: React.FC<ExtendedPaginationProps> = ({
                   onClick={() => onPageChange(Number(page))}
                   className={`px-3 py-2 rounded-lg font-medium transition-all ${
                     isCurrentPage
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
                   }`}
                 >
                   {page}
@@ -135,8 +135,8 @@ const Pagination: React.FC<ExtendedPaginationProps> = ({
             disabled={currentPage === totalPages}
             className={`flex items-center gap-1 px-3 py-2 rounded-lg font-medium transition-all ${
               currentPage === totalPages
-                ? "bg-white/5 text-gray-500 cursor-not-allowed"
-                : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900"
             }`}
           >
             <span className="hidden sm:inline">Next</span>

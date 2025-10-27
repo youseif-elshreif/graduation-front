@@ -81,20 +81,20 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
     filters.timeRange !== "all";
 
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6 mb-6 shadow-lg">
+    <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
       {/* Search and Basic Filters Row */}
       <div className="flex flex-col lg:flex-row gap-4 mb-4">
         {/* Search Input */}
         <div className="flex-1 relative">
-          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
           <input
             type="text"
             placeholder="Search by IP, threat type, or description..."
             value={filters.search}
             onChange={(e) => updateFilters({ search: e.target.value })}
-            className="w-full pl-10 pr-4 py-3 bg-white/20 border border-white/30 rounded-lg 
-                     text-white placeholder-gray-300 focus:outline-none focus:ring-2 
-                     focus:ring-blue-400 focus:border-transparent transition-all"
+            className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-lg 
+                     text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 
+                     focus:ring-blue-500 focus:border-blue-500 transition-all"
           />
         </div>
 
@@ -103,15 +103,15 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
           <select
             value={filters.severity}
             onChange={(e) => updateFilters({ severity: e.target.value })}
-            className="w-full py-3 px-4 bg-white/20 border border-white/30 rounded-lg 
-                     text-white focus:outline-none focus:ring-2 focus:ring-blue-400 
-                     focus:border-transparent transition-all"
+            className="w-full py-3 px-4 bg-white border border-gray-300 rounded-lg 
+                     text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                     focus:border-blue-500 transition-all"
           >
             {severityOptions.map((option) => (
               <option
                 key={option.value}
                 value={option.value}
-                className="bg-gray-800 text-white"
+                className="bg-white text-gray-900"
               >
                 {option.label}
               </option>
@@ -124,15 +124,15 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
           <select
             value={filters.timeRange}
             onChange={(e) => updateFilters({ timeRange: e.target.value })}
-            className="w-full py-3 px-4 bg-white/20 border border-white/30 rounded-lg 
-                     text-white focus:outline-none focus:ring-2 focus:ring-blue-400 
-                     focus:border-transparent transition-all"
+            className="w-full py-3 px-4 bg-white border border-gray-300 rounded-lg 
+                     text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                     focus:border-blue-500 transition-all"
           >
             {timeRangeOptions.map((option) => (
               <option
                 key={option.value}
                 value={option.value}
-                className="bg-gray-800 text-white"
+                className="bg-white text-gray-900"
               >
                 {option.label}
               </option>
@@ -144,8 +144,8 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
         {hasActiveFilters && (
           <button
             onClick={clearFilters}
-            className="flex items-center gap-2 px-4 py-3 bg-red-500/20 border border-red-400/30 
-                     rounded-lg text-red-300 hover:bg-red-500/30 transition-all"
+            className="flex items-center gap-2 px-4 py-3 bg-red-50 border border-red-200 
+                     rounded-lg text-red-600 hover:bg-red-100 transition-all"
           >
             <FiX className="w-4 h-4" />
             Clear
@@ -160,17 +160,17 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
           placeholder="Filter by source IP or label..."
           value={filters.source}
           onChange={(e) => updateFilters({ source: e.target.value })}
-          className="w-full lg:w-1/3 px-4 py-2 bg-white/20 border border-white/30 rounded-lg 
-                   text-white placeholder-gray-300 focus:outline-none focus:ring-2 
-                   focus:ring-blue-400 focus:border-transparent transition-all"
+          className="w-full lg:w-1/3 px-4 py-2 bg-white border border-gray-300 rounded-lg 
+                   text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 
+                   focus:ring-blue-500 focus:border-blue-500 transition-all"
         />
       </div>
 
       {/* Threat Types Tags */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <FiFilter className="w-4 h-4 text-gray-300" />
-          <span className="text-sm font-medium text-gray-300">
+          <FiFilter className="w-4 h-4 text-gray-600" />
+          <span className="text-sm font-medium text-gray-700">
             Threat Types:
           </span>
         </div>
@@ -184,7 +184,7 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
                   isSelected
                     ? "bg-blue-500 text-white shadow-lg transform scale-105"
-                    : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 border border-gray-300"
                 }`}
               >
                 {type}
