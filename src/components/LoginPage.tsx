@@ -223,24 +223,6 @@ const LoginPage: React.FC = () => {
               )}
             </div>
 
-            {/* Remember Me */}
-            <div className="flex items-center">
-              <input
-                id="rememberMe"
-                name="rememberMe"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded bg-white/10"
-                checked={formik.values.rememberMe}
-                onChange={formik.handleChange}
-              />
-              <label
-                htmlFor="rememberMe"
-                className="ml-2 block text-sm text-slate-200"
-              >
-                Remember me for 30 days
-              </label>
-            </div>
-
             {/* Submit Button */}
             <Button
               type="submit"
