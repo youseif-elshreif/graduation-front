@@ -23,7 +23,7 @@ const AllAttacksPage: React.FC = () => {
     threatTypes: [],
     severity: "",
     source: "",
-    timeRange: "24h",
+    timeRange: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);

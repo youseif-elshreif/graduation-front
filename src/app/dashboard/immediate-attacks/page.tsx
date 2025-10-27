@@ -15,7 +15,7 @@ const ImmediateAttacksPage: React.FC = () => {
     threatTypes: [],
     severity: "",
     source: "",
-    timeRange: "1h", // Shorter default for immediate attacks
+    timeRange: "",
   });
   const [selectedThreat, setSelectedThreat] = useState<Threat | null>(null);
   const [loading, setLoading] = useState(true);

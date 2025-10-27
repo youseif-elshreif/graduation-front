@@ -76,9 +76,9 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
   const hasActiveFilters =
     filters.search ||
     filters.threatTypes.length > 0 ||
-    filters.severity !== "all" ||
+    (filters.severity && filters.severity !== "all") ||
     filters.source ||
-    filters.timeRange !== "all";
+    (filters.timeRange && filters.timeRange !== "all");
 
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6 shadow-sm">
