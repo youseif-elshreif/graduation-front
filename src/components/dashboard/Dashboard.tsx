@@ -5,6 +5,7 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import Header from "@/components/dashboard/Header";
 import DateRangeFilter from "@/components/dashboard/DateRangeFilter";
 import KPICards from "@/components/dashboard/KPICards";
+import DashboardSkeleton from "@/components/dashboard/DashboardSkeleton";
 import {
   AlertsTimelineChart,
   AttackTypeChart,
@@ -63,15 +64,8 @@ const Dashboard: React.FC = () => {
     // Here you would typically update your data based on filters
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-linear-to-br from-slate-100 to-blue-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading Security Dashboard...</p>
-        </div>
-      </div>
-    );
+  if (isLoading || !user) {
+    return <DashboardSkeleton />;
   }
 
   const renderContent = () => {
@@ -83,32 +77,23 @@ const Dashboard: React.FC = () => {
             <DateRangeFilter onFilterChange={handleFilterChange} />
 
             {/* KPI Cards */}
-            <KPICards data={mockKPIData} loading={isLoading} />
+            <KPICards data={mockKPIData} />
 
             {/* Charts Section */}
             <div className="space-y-8">
               {/* Row 1: Timeline & Distribution */}
               <div className="grid grid-cols-1 xl:grid-cols-5 gap-6">
                 <div className="xl:col-span-3">
-                  <AlertsTimelineChart
-                    data={mockAlertsTimelineData}
-                    loading={isLoading}
-                  />
+                  <AlertsTimelineChart data={mockAlertsTimelineData} />
                 </div>
                 <div className="xl:col-span-2">
-                  <AttackTypeChart
-                    data={mockAttackTypeDistribution}
-                    loading={isLoading}
-                  />
+                  <AttackTypeChart data={mockAttackTypeDistribution} />
                 </div>
               </div>
 
               {/* Row 2: Severity & Network Analysis */}
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                <SeverityLevelsChart
-                  data={mockSeverityLevelData}
-                  loading={isLoading}
-                />
+                <SeverityLevelsChart data={mockSeverityLevelData} />
               </div>
 
               {/* Row 3: Enhanced Statistics Cards */}
