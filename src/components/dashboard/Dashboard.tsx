@@ -481,7 +481,7 @@ const Dashboard: React.FC = () => {
 
       case "all-attacks":
         return (
-          <div className="text-center py-12">
+          <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               All Attacks
             </h2>
@@ -579,7 +579,6 @@ const Dashboard: React.FC = () => {
               ? "Real-time monitoring and threat detection system overview"
               : `Manage ${activeTab.replace("-", " ")}`
           }
-          sidebarWidth={isSidebarCollapsed ? "w-16" : "w-64"}
         />
 
         {/* Page Content */}

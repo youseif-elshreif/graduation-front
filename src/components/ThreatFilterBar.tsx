@@ -73,21 +73,6 @@ const ThreatFilterBar: React.FC<ThreatFilterBarProps> = ({
     onFiltersChange(clearedFilters);
   };
 
-  const getSeverityBadgeClass = (severity: string) => {
-    switch (severity) {
-      case "Critical":
-        return "bg-red-600 text-white";
-      case "High":
-        return "bg-orange-500 text-white";
-      case "Medium":
-        return "bg-yellow-400 text-black";
-      case "Low":
-        return "bg-green-400 text-black";
-      default:
-        return "bg-gray-200 text-gray-800";
-    }
-  };
-
   const hasActiveFilters =
     filters.search ||
     filters.threatTypes.length > 0 ||

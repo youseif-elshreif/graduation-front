@@ -3,7 +3,7 @@
 
 import React from "react";
 import ThreatCard from "./ThreatCard";
-import { ThreatListProps, Threat } from "@/types/threats";
+import { ThreatListProps } from "@/types/threats";
 
 interface ExtendedThreatListProps extends ThreatListProps {
   showCheckboxes?: boolean;

@@ -6,7 +6,6 @@ import BulkActionBar from "@/components/BulkActionBar";
 import ThreatList from "@/components/ThreatList";
 import ThreatsSidebar from "@/components/RightSidebar/ThreatsSidebar";
 import Pagination from "@/components/Pagination";
-import ToggleLive from "@/components/ToggleLive";
 import ThreatDetailsModal from "@/components/modals/ThreatDetailsModal";
 import {
   loadSeedData,
@@ -26,7 +25,6 @@ const AllAttacksPage: React.FC = () => {
     source: "",
     timeRange: "24h",
   });
-  const [liveEnabled, setLiveEnabled] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
   const [selectedThreat, setSelectedThreat] = useState<Threat | null>(null);
@@ -47,20 +45,6 @@ const AllAttacksPage: React.FC = () => {
     };
     loadData();
   }, []);
-
-  // Handle real-time updates
-  useEffect(() => {
-    if (liveEnabled) {
-      const handleNewThreat = (newThreat: Threat) => {
-        setThreats((prev) => [newThreat, ...prev]);
-      };
-      startRealtimeSimulation(handleNewThreat);
-    } else {
-      stopRealtimeSimulation();
-    }
-
-    return () => stopRealtimeSimulation();
-  }, [liveEnabled]);
 
   // Apply filters
   useEffect(() => {
@@ -164,8 +148,11 @@ const AllAttacksPage: React.FC = () => {
     setSelectedIds(new Set());
   };
 
-  const handleViewDetails = (threat: Threat) => {
-    setSelectedThreat(threat);
+  const handleViewDetails = (id: string) => {
+    const threat = threats.find((t) => t.id === id);
+    if (threat) {
+      setSelectedThreat(threat);
+    }
   };
 
   const handleThreatAction = (
@@ -198,7 +185,7 @@ const AllAttacksPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
+      <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50 p-6">
         <div className="max-w-7xl mx-auto">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-gray-200 rounded w-64"></div>
@@ -215,7 +202,7 @@ const AllAttacksPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
       <div className="flex">
         {/* Main Content */}
         <div className="flex-1 p-6">
@@ -223,11 +210,6 @@ const AllAttacksPage: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
               <h1 className="text-3xl font-bold text-gray-900">All Attacks</h1>
-              <ToggleLive
-                isEnabled={liveEnabled}
-                onToggle={setLiveEnabled}
-                onShowNewItems={() => {}}
-              />
             </div>
 
             {/* Filter Bar */}

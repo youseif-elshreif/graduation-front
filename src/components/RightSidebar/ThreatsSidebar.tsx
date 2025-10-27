@@ -9,6 +9,42 @@ import {
   FiTrendingUp,
 } from "react-icons/fi";
 import { ThreatsSidebarProps, Threat } from "@/types/threats";
+import { IconType } from "react-icons";
+
+// Stat Card Component
+const StatCard: React.FC<{
+  icon: IconType;
+  title: string;
+  value: number;
+  color?: string;
+}> = ({ icon: Icon, title, value, color = "blue" }) => (
+  <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200">
+    <div className="flex items-center space-x-3">
+      <div className={`p-2 rounded-lg bg-${color}-100`}>
+        <Icon className={`w-5 h-5 text-${color}-600`} />
+      </div>
+      <div>
+        <p className="text-sm font-medium text-gray-600">{title}</p>
+        <p className="text-2xl font-bold text-gray-900">
+          {value.toLocaleString()}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
+// Progress Bar Component
+const ProgressBar: React.FC<{
+  percentage: number;
+  color?: string;
+}> = ({ percentage, color = "blue" }) => (
+  <div className="w-full bg-gray-200 rounded-full h-2">
+    <div
+      className={`h-2 rounded-full bg-${color}-600 transition-all duration-500`}
+      style={{ width: `${Math.min(percentage, 100)}%` }}
+    />
+  </div>
+);
 
 const ThreatsSidebar: React.FC<ThreatsSidebarProps> = ({
   threats,
@@ -56,39 +92,6 @@ const ThreatsSidebar: React.FC<ThreatsSidebarProps> = ({
       attackPatterns,
     };
   }, [threats]);
-
-  const StatCard: React.FC<{
-    icon: any;
-    title: string;
-    value: number;
-    color?: string;
-  }> = ({ icon: Icon, title, value, color = "blue" }) => (
-    <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200">
-      <div className="flex items-center space-x-3">
-        <div className={`p-2 rounded-lg bg-${color}-100`}>
-          <Icon className={`w-5 h-5 text-${color}-600`} />
-        </div>
-        <div>
-          <p className="text-sm font-medium text-gray-600">{title}</p>
-          <p className="text-2xl font-bold text-gray-900">
-            {value.toLocaleString()}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-
-  const ProgressBar: React.FC<{
-    percentage: number;
-    color?: string;
-  }> = ({ percentage, color = "blue" }) => (
-    <div className="w-full bg-gray-200 rounded-full h-2">
-      <div
-        className={`bg-${color}-500 h-2 rounded-full transition-all duration-300`}
-        style={{ width: `${Math.min(percentage, 100)}%` }}
-      />
-    </div>
-  );
 
   const maxHits = stats.topAttackers[0]?.count || 1;
   const maxPatternCount = stats.attackPatterns[0]?.count || 1;

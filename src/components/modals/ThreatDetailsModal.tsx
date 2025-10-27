@@ -1,20 +1,24 @@
-// FILE: src/components/modals/ThreatDetailsModal.jsx
-// Modal component for viewing detailed threat information (placeholder skeleton)
+// FILE: src/components/modals/ThreatDetailsModal.tsx
+// Modal component for viewing detailed threat information
 
 import React, { useEffect } from "react";
-import {
-  FiX,
-  FiCopy,
-  FiShield,
-  FiActivity,
-  FiClock,
-  FiMapPin,
-} from "react-icons/fi";
+import { FiX, FiCopy, FiShield, FiActivity, FiClock } from "react-icons/fi";
+import { Threat } from "@/types/threats";
 
-const ThreatDetailsModal = ({ threat, isOpen, onClose }) => {
+interface ThreatDetailsModalProps {
+  threat: Threat | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ThreatDetailsModal: React.FC<ThreatDetailsModalProps> = ({
+  threat,
+  isOpen,
+  onClose,
+}) => {
   // Handle ESC key to close modal
   useEffect(() => {
-    const handleEscKey = (event) => {
+    const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }
@@ -33,11 +37,11 @@ const ThreatDetailsModal = ({ threat, isOpen, onClose }) => {
 
   if (!isOpen || !threat) return null;
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
   };
 
-  const getSeverityBadgeClass = (severity) => {
+  const getSeverityBadgeClass = (severity: string) => {
     switch (severity) {
       case "Critical":
         return "bg-red-600 text-white";
@@ -52,7 +56,7 @@ const ThreatDetailsModal = ({ threat, isOpen, onClose }) => {
     }
   };
 
-  const formatTimestamp = (timestamp) => {
+  const formatTimestamp = (timestamp: string) => {
     return new Date(timestamp).toLocaleString("en-US", {
       year: "numeric",
       month: "long",
@@ -77,7 +81,7 @@ const ThreatDetailsModal = ({ threat, isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
+        <div className="bg-linear-to-r from-blue-600 to-purple-600 p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2
@@ -237,51 +241,18 @@ const ThreatDetailsModal = ({ threat, isOpen, onClose }) => {
           </div>
 
           {/* Placeholder Sections */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <FiMapPin className="w-5 h-5 text-purple-400" />
-                Geolocation Analysis
-              </h3>
-              <div className="bg-gray-800 rounded-lg p-6 text-center">
-                <div className="text-6xl mb-4">🌍</div>
-                <p className="text-gray-400">
-                  Geolocation data will be available here
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  IP location, ISP information, and threat intelligence
-                </p>
-              </div>
-            </div>
 
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">
-                Packet Capture
-              </h3>
-              <div className="bg-gray-800 rounded-lg p-6 text-center">
-                <div className="text-6xl mb-4">📊</div>
-                <p className="text-gray-400">
-                  Packet analysis will be available here
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Network traffic patterns and payload analysis
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Timeline Placeholder */}
-          <div className="mb-6">
+          <div>
             <h3 className="text-lg font-semibold text-white mb-4">
-              Attack Timeline
+              Packet Capture
             </h3>
             <div className="bg-gray-800 rounded-lg p-6 text-center">
-              <div className="text-6xl mb-4">⏰</div>
+              <div className="text-6xl mb-4">📊</div>
               <p className="text-gray-400">
-                Detailed timeline analysis will be available here
+                Packet analysis will be available here
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Attack progression, response actions, and related events
+                Network traffic patterns and payload analysis
               </p>
             </div>
           </div>

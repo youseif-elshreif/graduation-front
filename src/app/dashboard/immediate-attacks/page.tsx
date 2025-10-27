@@ -3,13 +3,8 @@
 import React, { useState, useEffect } from "react";
 import ThreatFilterBar from "@/components/ThreatFilterBar";
 import ThreatList from "@/components/ThreatList";
-import ToggleLive from "@/components/ToggleLive";
 import ThreatDetailsModal from "@/components/modals/ThreatDetailsModal";
-import {
-  loadSeedData,
-  startRealtimeSimulation,
-  stopRealtimeSimulation,
-} from "../../../../lib/threats";
+import { loadSeedData } from "../../../../lib/threats";
 import { Threat, FilterState } from "@/types/threats";
 
 const ImmediateAttacksPage: React.FC = () => {
@@ -22,7 +17,6 @@ const ImmediateAttacksPage: React.FC = () => {
     source: "",
     timeRange: "1h", // Shorter default for immediate attacks
   });
-  const [liveEnabled, setLiveEnabled] = useState(true); // Enabled by default
   const [selectedThreat, setSelectedThreat] = useState<Threat | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,26 +40,6 @@ const ImmediateAttacksPage: React.FC = () => {
     };
     loadData();
   }, []);
-
-  // Handle real-time updates
-  useEffect(() => {
-    if (liveEnabled) {
-      const handleNewThreat = (newThreat: Threat) => {
-        // Only add if it's immediate priority
-        if (
-          newThreat.severity === "Critical" ||
-          newThreat.severity === "High"
-        ) {
-          setThreats((prev) => [newThreat, ...prev]);
-        }
-      };
-      startRealtimeSimulation(handleNewThreat);
-    } else {
-      stopRealtimeSimulation();
-    }
-
-    return () => stopRealtimeSimulation();
-  }, [liveEnabled]);
 
   // Apply filters
   useEffect(() => {
@@ -130,8 +104,11 @@ const ImmediateAttacksPage: React.FC = () => {
     setFilters(newFilters);
   };
 
-  const handleViewDetails = (threat: Threat) => {
-    setSelectedThreat(threat);
+  const handleViewDetails = (id: string) => {
+    const threat = threats.find((t) => t.id === id);
+    if (threat) {
+      setSelectedThreat(threat);
+    }
   };
 
   const handleThreatAction = (
@@ -157,7 +134,7 @@ const ImmediateAttacksPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 p-6">
+      <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50 p-6">
         <div className="max-w-4xl mx-auto">
           <div className="animate-pulse space-y-6">
             <div className="h-8 bg-gray-200 rounded w-64"></div>
@@ -174,7 +151,7 @@ const ImmediateAttacksPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 p-6">
+    <div className="min-h-screen bg-linear-to-br from-red-50 to-orange-50">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -186,11 +163,6 @@ const ImmediateAttacksPage: React.FC = () => {
               Critical and High priority threats requiring immediate attention
             </p>
           </div>
-          <ToggleLive
-            isEnabled={liveEnabled}
-            onToggle={setLiveEnabled}
-            onShowNewItems={() => {}}
-          />
         </div>
 
         {/* Filter Bar */}

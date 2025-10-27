@@ -12,6 +12,7 @@ export interface Threat {
   hits: number;
   notes: string;
   pattern: string;
+  isNew?: boolean;
 }
 
 export interface FilterState {
@@ -26,7 +27,8 @@ export interface ThreatCardProps {
   threat: Threat;
   isSelected?: boolean;
   showActions?: boolean;
-  onSelect?: (id: string) => void;
+  showCheckbox?: boolean;
+  onSelect?: (id: string, selected: boolean) => void;
   onViewDetails?: (id: string) => void;
   onBlock?: (id: string) => void;
   onInvestigate?: (id: string) => void;
@@ -37,7 +39,10 @@ export interface ThreatListProps {
   threats: Threat[];
   selectedIds?: Set<string>;
   showActions?: boolean;
-  onSelect?: (id: string) => void;
+  showCheckboxes?: boolean;
+  emptyMessage?: string;
+  onSelect?: (id: string, selected: boolean) => void;
+  onSelectAll?: (selected: boolean) => void;
   onViewDetails?: (id: string) => void;
   onBlock?: (id: string) => void;
   onInvestigate?: (id: string) => void;
@@ -52,7 +57,7 @@ export interface ThreatFilterBarProps {
 export interface BulkActionBarProps {
   selectedCount: number;
   totalCount: number;
-  onSelectAll: () => void;
+  onSelectAll: (selected: boolean) => void;
   onBlockSelected: () => void;
   onDismissSelected: () => void;
   onInvestigateSelected: () => void;

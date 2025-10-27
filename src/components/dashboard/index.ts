@@ -14,4 +14,4 @@ export {
 export { default as IPAlertsTimelineModal } from "./IPAlertsTimelineModal";
 
 // Skeleton Components
-export { default as DashboardSkeleton } from "./DashboardSkeleton";
+// export { default as DashboardSkeleton } from "./DashboardSkeleton";
