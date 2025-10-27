@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { FiGlobe } from "react-icons/fi";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Header from "@/components/dashboard/Header";
 import DateRangeFilter from "@/components/dashboard/DateRangeFilter";
@@ -295,28 +296,28 @@ const Dashboard: React.FC = () => {
                         {[
                           {
                             ip: "185.220.101.42",
-                            country: "🇷🇺 Russia",
+                            country: "Russia",
                             threat: "DDoS",
                             status: "Blocked",
                             time: "2m ago",
                           },
                           {
                             ip: "103.28.36.181",
-                            country: "🇨🇳 China",
+                            country: "China",
                             threat: "Brute Force",
                             status: "Blocked",
                             time: "5m ago",
                           },
                           {
                             ip: "45.146.164.110",
-                            country: "🇳🇱 Netherlands",
+                            country: "Netherlands",
                             threat: "Port Scan",
                             status: "Monitored",
                             time: "8m ago",
                           },
                           {
                             ip: "91.240.118.172",
-                            country: "🇺🇦 Ukraine",
+                            country: "Ukraine",
                             threat: "Web Attack",
                             status: "Blocked",
                             time: "12m ago",
@@ -330,7 +331,10 @@ const Dashboard: React.FC = () => {
                               {item.ip}
                             </td>
                             <td className="px-6 py-4 text-sm text-gray-700">
-                              {item.country}
+                              <div className="flex items-center gap-2">
+                                <FiGlobe className="w-4 h-4 text-gray-400" />
+                                {item.country}
+                              </div>
                             </td>
                             <td className="px-6 py-4">
                               <span
