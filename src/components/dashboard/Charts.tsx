@@ -1,5 +1,7 @@
-import React, { useMemo } from "react";
-import { Card, ChartWrapper } from "@/components/ui";
+import React, { useMemo, useState } from "react";
+import { Card, ChartWrapper, Button } from "@/components/ui";
+import { FiEye } from "react-icons/fi";
+import IPAlertsTimelineModal from "./IPAlertsTimelineModal";
 import {
   AlertsTimelineData,
   AttackTypeDistribution,
@@ -15,6 +17,7 @@ export const AlertsTimelineChart: React.FC<AlertsTimelineChartProps> = ({
   data,
   loading,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const option = useMemo(
     () => ({
       title: {
@@ -78,9 +81,30 @@ export const AlertsTimelineChart: React.FC<AlertsTimelineChartProps> = ({
   );
 
   return (
-    <Card title="Alerts Timeline" className="col-span-3">
-      <ChartWrapper option={option} height={300} loading={loading} />
-    </Card>
+    <>
+      <Card
+        title="Alerts Timeline"
+        className="col-span-3"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center space-x-2"
+          >
+            <FiEye className="w-4 h-4" />
+            <span>View by IP</span>
+          </Button>
+        }
+      >
+        <ChartWrapper option={option} height={300} loading={loading} />
+      </Card>
+
+      <IPAlertsTimelineModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 };
 
@@ -143,25 +167,6 @@ export const AttackTypeChart: React.FC<AttackTypeChartProps> = ({
   return (
     <Card title="Attack Distribution" className="col-span-2">
       <ChartWrapper option={option} height={300} loading={loading} />
-
-      {/* Priority Breakdown */}
-      <div className="mt-4 grid grid-cols-2 gap-4">
-        {data.slice(0, 4).map((item) => (
-          <div key={item.type} className="text-center">
-            <h4 className="text-sm font-medium text-gray-900 capitalize">
-              {item.type.replace("_", " ")}
-            </h4>
-            <div className="flex justify-center space-x-2 mt-1">
-              <span className="text-xs px-2 py-1 bg-red-100 text-red-800 rounded">
-                C: {item.priority.critical}
-              </span>
-              <span className="text-xs px-2 py-1 bg-orange-100 text-orange-800 rounded">
-                H: {item.priority.high}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
     </Card>
   );
 };
